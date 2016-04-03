@@ -16,7 +16,24 @@ namespace AirControllerWebService.Controllers.REST
             {
                 var value = ManageDB.GetCO2LastValue();
 
-                var valueInPercent = Convert.ToInt32(value / 70);
+                var valueInt = Convert.ToInt32(value);
+
+                int valueInPercent;
+
+                if (value < 350)
+                {
+                    valueInPercent = 0;
+                }
+                else if (value > 1000)
+                {
+                    valueInPercent = 100;
+                }
+                else
+                {
+                    valueInPercent = Convert.ToInt32((value / 100) * 6.5);
+                }
+
+                //var valueInPercent =  / 70);
 
                 return Request.CreateResponse(HttpStatusCode.OK, valueInPercent);
             }

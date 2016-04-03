@@ -32,12 +32,12 @@ namespace AirControllerWebService.Helper
         {
             try
             {
-                var status = db.Status.FirstOrDefault().Mode;
-                return status;
+                byte? status = db.Status.FirstOrDefault().Mode;
+                return (status ?? 0);
             }
             catch
             {
-                return null;
+                return 0;
             }
         }
 
